@@ -1,0 +1,70 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<h1 style="text-align:center;">Job Portal</h1>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card p-4 shadow">
+        <h2 class="text-center mb-4">Register</h2>
+
+        <% if (typeof error !== 'undefined') { %>
+          <div class="alert alert-danger"><%= error %></div>
+        <% } %>
+
+        <form method="POST" action="/register">
+          <div class="mb-3">
+            <input type="text" name="name" class="form-control" placeholder="Name" required />
+          </div>
+          <div class="mb-3">
+            <input type="email" name="email" class="form-control" placeholder="Email" required />
+          </div>
+          <div class="mb-3">
+  <input type="password" name="password" id="password" class="form-control" placeholder="Password" required />
+  <small id="passwordHelp" class="form-text"></small>
+</div>
+
+          <div class="mb-3">
+            <select name="role" class="form-select">
+              <option value="Job Seeker">Job Seeker</option>
+              <option value="Employer">Employer</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+
+        <p class="text-center mt-3">
+          Already have an account? <a href="/login">Login</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  const passwordInput = document.getElementById('password');
+  const helpText = document.getElementById('passwordHelp');
+
+  passwordInput.addEventListener('input', () => {
+    const value = passwordInput.value;
+
+    if (value.length < 8) {
+      helpText.textContent = 'Password must be at least 8 characters.';
+      helpText.style.color = 'red';
+    } else if (!/[A-Z]/.test(value)) {
+      helpText.textContent = 'Include at least one uppercase letter.';
+      helpText.style.color = 'red';
+    } else if (!/[a-z]/.test(value)) {
+      helpText.textContent = 'Include at least one lowercase letter.';
+      helpText.style.color = 'red';
+    } else if (!/[0-9]/.test(value)) {
+      helpText.textContent = 'Include at least one number.';
+      helpText.style.color = 'red';
+    } else if (!/[\W_]/.test(value)) {
+      helpText.textContent = 'Include at least one special character.';
+      helpText.style.color = 'red';
+    } else {
+      helpText.textContent = 'Strong password ✅';
+      helpText.style.color = 'green';
+    }
+  });
+</script>
+
